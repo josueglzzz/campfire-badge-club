@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Campfire Badge Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+
+<!-- ══════ LOGIN ══════ -->
+<div class="fullscreen active" id="s-login">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;">
+    <div style="text-align:center;margin-bottom:36px;">
+      <div style="font-size:56px;margin-bottom:12px">🔥</div>
+      <div class="serif" style="font-size:28px;color:var(--amber-l);line-height:1.2">Campfire<br><span style="color:var(--text)">Badge Club</span></div>
+      <div style="font-size:13px;color:var(--text3);margin-top:6px">Tu aventura cervecera comienza aquí</div>
+    </div>
+    <div style="width:100%;display:flex;flex-direction:column;gap:12px;">
+      <div><div class="inp-lbl">Correo electrónico</div>
+        <input class="inp" id="l-email" type="email" placeholder="trail@campfirebadge.mx" /></div>
+      <div><div class="inp-lbl">Contraseña</div>
+        <input class="inp" id="l-pass" type="password" placeholder="••••••••" /></div>
+      <div id="l-err" class="err-box" style="display:none"></div>
+      <div style="margin-top:6px;display:flex;flex-direction:column;gap:10px;">
+        <button class="btn" onclick="doLogin()">🔑 Iniciar sesión</button>
+        <button class="btn btn-ghost" onclick="goAgeGate('admin')">🛡️ Panel admin</button>
+      </div>
+      <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--text3)">
+        ¿No tienes cuenta? <span style="color:var(--amber-l);cursor:pointer" onclick="showScreen('s-register')">Regístrate gratis</span>
+      </p>
+      <div class="info-box" style="text-align:center;margin-top:4px;">
+        <p>⚠️ Debes ser mayor de 18 años para usar esta app</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REGISTER ACCOUNT ══════ -->
+<div class="fullscreen" id="s-register">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-size:48px;margin-bottom:10px">🏕️</div>
+      <div class="serif" style="font-size:24px;color:var(--amber-l)">Crear cuenta</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">Campfire Badge Club</div>
+    </div>
+    <div style="width:100%;display:flex;flex-direction:column;gap:12px;">
+      <div><div class="inp-lbl">Nombre completo</div><input class="inp" id="r-name" placeholder="Tu nombre" /></div>
+      <div><div class="inp-lbl">Correo electrónico</div><input class="inp" id="r-email" type="email" placeholder="trail@campfirebadge.mx" /></div>
+      <div>
+        <div class="inp-lbl">Contraseña</div>
+        <input class="inp" id="r-pass" type="password" placeholder="Mín. 8 caracteres, incluye un número" />
+        <div class="inp-hint">Mínimo 8 caracteres · Al menos un número</div>
+      </div>
+      <div id="r-err" class="err-box" style="display:none"></div>
+      <div style="margin-top:6px;display:flex;flex-direction:column;gap:10px;">
+        <button class="btn" onclick="doRegister()">🏕️ Crear cuenta</button>
+        <button class="btn btn-ghost" onclick="showScreen('s-login')">← Ya tengo cuenta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ AGE GATE ══════ -->
+<div class="fullscreen" id="s-agegate">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-size:48px;margin-bottom:10px">🪪</div>
+      <div class="serif" style="font-size:22px;color:var(--text)">Verificación de edad</div>
+      <div style="font-size:13px;color:var(--text3);margin-top:6px">Por ley, debes ser mayor de 18 años para acceder.</div>
+    </div>
+    <div style="width:100%;display:flex;flex-direction:column;gap:12px;">
+      <div><div class="inp-lbl">Fecha de nacimiento</div><input class="inp" id="ag-date" type="date" /></div>
+      <div id="ag-err" class="err-box" style="display:none"></div>
+      <button class="btn" style="margin-top:6px" onclick="checkAge()">✅ Confirmar edad</button>
+      <button class="btn btn-ghost" onclick="showScreen('s-login')">← Volver</button>
+      <p style="text-align:center;font-size:11px;color:var(--text3)">Tu fecha de nacimiento no se almacena. Solo verificamos tu edad.</p>
+      <div class="info-box" style="text-align:center;"><p>⚖️ Ley General de Salud · NOM bebidas alcohólicas</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ HOME ══════ -->
+<div class="screen" id="s-home">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:12px;color:var(--text3)">Buenas noches,</div>
+        <div style="font-size:20px;font-weight:600">Carlos 🔥</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="serif" style="font-size:13px;color:var(--amber-l)">CBC</span>
+        <div onclick="navTo('s-profile',4)" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--amber),var(--orange-l))">CG</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;">
+      <span class="lvl-badge">🌿 Nivel 4 — Explorador</span>
+      <span style="font-size:12px;color:var(--amber-l)">🔥 7 días</span>
+    </div>
+    <div style="margin-top:10px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:11px;color:var(--text3)">Progreso al nivel 5</span>
+        <span style="font-size:11px;color:var(--amber-l)">680 / 1000 pts</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-fill" style="width:68%"></div></div>
+    </div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="scroll">
+    <div class="sec">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-val">680</div><div class="stat-lbl">Puntos</div></div>
+        <div class="stat-card"><div class="stat-val">23</div><div class="stat-lbl">Consumos</div></div>
+        <div class="stat-card"><div class="stat-val">#12</div><div class="stat-lbl">Ranking</div></div>
+      </div>
+    </div>
+    <div class="sec" style="padding-top:14px;">
+      <div class="pts-row">
+        <div class="pts-cell"><div class="pts-val">+10</div><div class="pts-lbl">pts / visita</div></div>
+        <div class="pts-cell"><div class="pts-val">+5</div><div class="pts-lbl">pts / consumo</div></div>
+      </div>
+    </div>
+    <!-- Registros SOLO desde Home -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Registrar</span></div>
+      <div class="q-grid">
+        <button class="q-btn" onclick="showScreen('s-register-beer')"><i class="ti ti-pencil"></i><span>Registrar consumo</span></button>
+        <button class="q-btn" onclick="showScreen('s-visit')"><i class="ti ti-map-pin"></i><span>Registrar visita</span></button>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Explorar</span></div>
+      <div class="q-grid">
+        <button class="q-btn" onclick="navTo('s-badges',3)"><i class="ti ti-medal"></i><span>Mis parches</span></button>
+        <button class="q-btn" onclick="navTo('s-ontap',1)"><i class="ti ti-beer"></i><span>On Tap ahora</span></button>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Desafíos activos</span><span class="sec-link">Ver todos</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="ch-card">
+          <div class="ch-icon">⚡</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">Experto IPA</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:2px">Prueba 3 IPAs esta semana</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+              <div class="prog-wrap" style="flex:1"><div class="prog-fill" style="width:66%"></div></div>
+              <span style="font-size:11px;color:var(--text3)">2/3</span>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">Premio: <span style="color:var(--amber-l)">Parche + 50 pts</span></div>
+          </div>
+        </div>
+        <div class="ch-card">
+          <div class="ch-icon">🌲</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">Fiel al campamento</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:2px">Visita 4 veces este mes</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+              <div class="prog-wrap" style="flex:1"><div class="prog-fill" style="width:50%"></div></div>
+              <span style="font-size:11px;color:var(--text3)">2/4</span>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">Premio: <span style="color:var(--amber-l)">Cerveza gratis</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sec" style="padding-bottom:24px;">
+      <div class="sec-hdr"><span class="sec-title">Actividad reciente</span></div>
+      <div class="card">
+        <div class="act-row">
+          <div class="act-icon" style="background:rgba(217,119,6,.12)">🍺</div>
+          <div class="act-text"><div>Registraste <strong>Fuego Negro Stout</strong></div><div class="act-sub">Beer Garden · hoy 20:14 hrs</div></div>
+          <div class="act-pts">+5 pts</div>
+        </div>
+        <div class="act-row">
+          <div class="act-icon" style="background:rgba(34,197,94,.1)">📍</div>
+          <div class="act-text"><div>Visita registrada en <strong>Tavern</strong></div><div class="act-sub">Ayer · 21:30 hrs</div></div>
+          <div class="act-pts">+10 pts</div>
+        </div>
+        <div class="act-row">
+          <div class="act-icon" style="background:rgba(168,85,247,.1)">🏅</div>
+          <div class="act-text"><div>Desbloqueaste parche <strong>Noctámbulo</strong></div><div class="act-sub">Anteanoche · 22:05 hrs</div></div>
+          <div class="act-pts">🎖️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ RANKING (con barra fija inferior) ══════ -->
+<div class="screen" id="s-ranking">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:4px">Clasificación global</div>
+        <div class="serif" style="font-size:22px">🏆 Ranking</div>
+      </div>
+      <div>
+        <span style="font-size:11px;color:var(--text3)">Reinicia cada mes</span>
+      </div>
+    </div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="scroll">
+    <div class="card" style="margin:16px 20px;padding:0;overflow:hidden;">
+      <div class="rank-row top1">
+        <div class="rnum g">🥇</div>
+        <div class="rav" style="background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;font-size:15px;box-shadow:0 0 12px rgba(245,158,11,0.4)">MR</div>
+        <div class="rname" style="font-weight:600">María Rodríguez</div>
+        <div class="rpts">2,840 pts</div>
+      </div>
+      <div class="rank-row top2">
+        <div class="rnum s">🥈</div>
+        <div class="rav" style="background:linear-gradient(135deg,#60A5FA,#2563EB);color:#fff">JL</div>
+        <div class="rname">Jorge López</div>
+        <div class="rpts">2,210 pts</div>
+      </div>
+      <div class="rank-row top3">
+        <div class="rnum b">🥉</div>
+        <div class="rav" style="background:linear-gradient(135deg,#F97316,#C2410C);color:#fff">AS</div>
+        <div class="rname">Ana Sánchez</div>
+        <div class="rpts">1,990 pts</div>
+      </div>
+      <div class="rank-row"><div class="rnum">4</div><div class="rav" style="background:var(--bg4);color:var(--text2)">DM</div><div class="rname">Diego Mora</div><div class="rpts">1,650 pts</div></div>
+      <div class="rank-row"><div class="rnum">5</div><div class="rav" style="background:var(--bg4);color:var(--text2)">LV</div><div class="rname">Lucía Vargas</div><div class="rpts">1,420 pts</div></div>
+      <div class="rank-row"><div class="rnum">6</div><div class="rav" style="background:var(--bg4);color:var(--text2)">RH</div><div class="rname">Roberto Herrera</div><div class="rpts">1,205 pts</div></div>
+      <div class="rank-row"><div class="rnum">7</div><div class="rav" style="background:var(--bg4);color:var(--text2)">PG</div><div class="rname">Patricia García</div><div class="rpts">980 pts</div></div>
+      <div class="rank-row"><div class="rnum">8</div><div class="rav" style="background:var(--bg4);color:var(--text2)">FM</div><div class="rname">Fernando Mejía</div><div class="rpts">870 pts</div></div>
+      <div class="rank-row"><div class="rnum">9</div><div class="rav" style="background:var(--bg4);color:var(--text2)">SN</div><div class="rname">Sofía Núñez</div><div class="rpts">760 pts</div></div>
+      <div class="rank-row"><div class="rnum" style="color:var(--text3)">10</div><div class="rav" style="background:var(--bg4);color:var(--text2)">RA</div><div class="rname">Rodrigo Alvarado</div><div class="rpts">710 pts</div></div>
+      <div class="rank-row"><div class="rnum" style="color:var(--text3)">11</div><div class="rav" style="background:var(--bg4);color:var(--text2)">VT</div><div class="rname">Valentina Torres</div><div class="rpts">695 pts</div></div>
+    </div>
+    <div style="height:8px"></div>
+  </div>
+</div>
+
+<!-- Sticky bar: tu posición en ranking (visible solo en pantalla ranking) -->
+<div class="rank-footer" id="rank-footer">
+  <div class="rank-footer-inner">
+    <div style="font-size:18px;font-weight:700;color:var(--amber-l);width:28px;text-align:center;flex-shrink:0">#12</div>
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--orange-l));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:#fff;flex-shrink:0">CG</div>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:500">Carlos González <span style="font-size:11px;color:var(--text3)">(tú)</span></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:1px">680 pts · 320 pts para el #11</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:13px;font-weight:600;color:var(--amber-l)">680 pts</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:1px">Tu posición</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REGISTER BEER ══════ -->
+<div class="screen" id="s-register-beer">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="navTo('s-home',0)" style="background:var(--bg3);border:.5px solid var(--border2);color:var(--text2);border-radius:var(--rs);padding:8px 12px;cursor:pointer;font-size:13px;">← Volver</button>
+      <div>
+        <div style="font-size:12px;color:var(--text3)">Registra tu consumo</div>
+        <div class="serif" style="font-size:20px">📝 Nueva cerveza</div>
+      </div>
+    </div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="scroll" id="rb-form">
+    <div style="display:flex;align-items:center;gap:8px;padding:14px 20px 6px;">
+      <i class="ti ti-info-circle" style="color:var(--amber-l);font-size:16px"></i>
+      <span style="font-size:12px;color:var(--text3)">Cada consumo suma <strong style="color:var(--amber-l)">+5 pts</strong> · Máx. 3 por día</span>
+    </div>
+    <div style="padding:10px 20px 24px;display:flex;flex-direction:column;gap:12px;">
+      <div class="info-box"><p>📋 Ingresa los datos de la cerveza que consumiste.</p></div>
+      <div><div class="inp-lbl">Nombre de la cerveza *</div><input class="inp" id="rb-name" placeholder="Ej. Fuego Negro Stout" /></div>
+      <div class="grid2">
+        <div><div class="inp-lbl">Estilo *</div><input class="inp" id="rb-style" placeholder="IPA, Stout..." /></div>
+        <div><div class="inp-lbl">Sucursal</div>
+          <select class="inp" id="rb-branch" style="cursor:pointer"><option>Beer Garden</option><option>Tavern</option></select>
+        </div>
+      </div>
+      <div id="rb-err" class="err-box" style="display:none"></div>
+      <button class="btn" style="margin-top:6px" onclick="submitBeer()">✅ Registrar consumo (+5 pts)</button>
+    </div>
+  </div>
+  <div id="rb-success" style="display:none;flex:1;padding:20px;">
+    <div class="success-card">
+      <div class="s-icon">✅</div>
+      <div style="font-size:22px;font-weight:600;margin-bottom:6px">¡Consumo registrado!</div>
+      <div id="rb-sname" style="font-size:14px;font-weight:600;color:var(--amber-l);margin-bottom:4px"></div>
+      <div id="rb-stime" style="font-size:12px;color:var(--text3);margin-bottom:16px"></div>
+      <div style="font-size:14px;color:var(--text3);margin-bottom:18px">Ganaste <strong style="color:var(--amber-l)">+5 puntos</strong></div>
+      <div class="stat-grid" style="margin-bottom:18px;">
+        <div class="stat-card"><div class="stat-val">685</div><div class="stat-lbl">Puntos</div></div>
+        <div class="stat-card"><div class="stat-val">24</div><div class="stat-lbl">Cervezas</div></div>
+        <div class="stat-card"><div class="stat-val">🔥7</div><div class="stat-lbl">Racha</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button class="btn btn-ghost" onclick="resetBeer()">Registrar otra</button>
+        <button class="btn" onclick="navTo('s-home',0)">🏠 Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REGISTER VISIT ══════ -->
+<div class="screen" id="s-visit">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="navTo('s-home',0)" style="background:var(--bg3);border:.5px solid var(--border2);color:var(--text2);border-radius:var(--rs);padding:8px 12px;cursor:pointer;font-size:13px;">← Volver</button>
+      <div>
+        <div style="font-size:12px;color:var(--text3)">Registrar visita</div>
+        <div class="serif" style="font-size:20px">📍 Nueva visita</div>
+      </div>
+    </div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="scroll" id="v-form">
+    <div style="padding:20px;display:flex;flex-direction:column;gap:12px;">
+      <div class="info-box"><p>📍 Selecciona la sucursal que visitaste hoy. Ganas <strong style="color:var(--amber-l)">+10 pts</strong> por visita.</p></div>
+      <div><div class="inp-lbl">Sucursal visitada</div>
+        <select class="inp" id="v-branch" style="cursor:pointer"><option>Beer Garden</option><option>Tavern</option></select>
+      </div>
+      <div><div class="inp-lbl">Hora aproximada</div><input class="inp" id="v-time" type="time" /></div>
+      <button class="btn" style="margin-top:6px" onclick="submitVisit()">📍 Registrar visita (+10 pts)</button>
+    </div>
+  </div>
+  <div id="v-success" style="display:none;flex:1;padding:20px;">
+    <div class="success-card">
+      <div class="s-icon">🏕️</div>
+      <div style="font-size:22px;font-weight:600;margin-bottom:6px">¡Visita registrada!</div>
+      <div id="v-sname" style="font-size:14px;font-weight:600;color:var(--amber-l);margin-bottom:4px"></div>
+      <div id="v-stime" style="font-size:12px;color:var(--text3);margin-bottom:16px"></div>
+      <div style="font-size:14px;color:var(--text3);margin-bottom:18px">Ganaste <strong style="color:var(--amber-l)">+10 puntos</strong> · Racha: 🔥 8 días</div>
+      <div class="stat-grid" style="margin-bottom:18px;">
+        <div class="stat-card"><div class="stat-val">690</div><div class="stat-lbl">Puntos</div></div>
+        <div class="stat-card"><div class="stat-val">🔥8</div><div class="stat-lbl">Racha</div></div>
+        <div class="stat-card"><div class="stat-val">#11</div><div class="stat-lbl">Ranking</div></div>
+      </div>
+      <button class="btn" onclick="navTo('s-home',0)">🏠 Volver al inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ BADGES ══════ -->
+<div class="screen" id="s-badges">
+  <div class="hdr">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:4px">Colección</div>
+    <div class="serif" style="font-size:22px">🎖️ Parches</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:4px">Campfire Badge Club</div>
+  </div>
+  <div class="fire-line"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px 4px;">
+    <span style="font-size:13px;color:var(--text2)">8 desbloqueados · 12 por descubrir</span>
+    <span class="tag amber">4 físicos por reclamar</span>
+  </div>
+  <div class="scroll">
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Por nivel</span></div>
+      <div class="badge-grid">
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(217,119,6,.15)">🌱</div><div class="badge-lbl">Chispa</div><div class="badge-sub">Niv. 1</div></div>
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(217,119,6,.15)">🌿</div><div class="badge-lbl">Scout</div><div class="badge-sub">Niv. 2</div></div>
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(217,119,6,.15)">🔥</div><div class="badge-lbl">Fogonero</div><div class="badge-sub">Niv. 3</div></div>
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(168,85,247,.12)">🌲</div><div class="badge-lbl">Explorador</div><div class="badge-sub">Niv. 4</div></div>
+        <div class="badge-item"><div class="badge-icon off" style="background:var(--bg4)">⛰️</div><div class="badge-lbl">Montañista</div><div class="badge-sub">Niv. 5</div></div>
+        <div class="badge-item"><div class="badge-icon off" style="background:var(--bg4)">🦉</div><div class="badge-lbl">Guardián</div><div class="badge-sub">Niv. 6</div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Por visitas</span></div>
+      <div class="badge-grid">
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(34,197,94,.1)">🏕️</div><div class="badge-lbl">Primera fogata</div><div class="badge-sub">1 visita</div></div>
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(34,197,94,.1)">🌙</div><div class="badge-lbl">Noctámbulo</div><div class="badge-sub">5 noches</div></div>
+        <div class="badge-item"><div class="badge-icon off" style="background:var(--bg4)">🎯</div><div class="badge-lbl">Habitué</div><div class="badge-sub">20 visitas</div></div>
+      </div>
+    </div>
+    <div class="sec" style="padding-bottom:24px;">
+      <div class="sec-hdr"><span class="sec-title">Por estilos</span></div>
+      <div class="badge-grid">
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(217,119,6,.12)">🍺</div><div class="badge-lbl">Hophead IPA</div><div class="badge-sub">5 IPAs</div></div>
+        <div class="badge-item"><div class="badge-icon on" style="background:rgba(30,30,40,.5);border:.5px solid rgba(255,255,255,.1)">⚫</div><div class="badge-lbl">Dark Side</div><div class="badge-sub">3 Stouts</div></div>
+        <div class="badge-item"><div class="badge-icon off" style="background:var(--bg4)">🌾</div><div class="badge-lbl">Clásico</div><div class="badge-sub">5 Lagers</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PROFILE ══════ -->
+<div class="screen" id="s-profile">
+  <div class="prof-hdr">
+    <div class="prof-av">CG</div>
+    <div style="font-size:20px;font-weight:600">Carlos González</div>
+    <div style="font-size:13px;color:var(--text2);margin-top:2px">carlos@mail.com</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:2px">Campfire Badge Club</div>
+    <div style="margin-top:10px"><span class="lvl-badge">🌿 Nivel 4 — Explorador</span></div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="card" style="margin:16px 20px;padding:0;overflow:hidden;">
+    <div class="prof-stats">
+      <div class="ps"><div class="ps-val">680</div><div class="ps-lbl">Puntos</div></div>
+      <div class="ps"><div class="ps-val">🔥7</div><div class="ps-lbl">Racha</div></div>
+      <div class="ps"><div class="ps-val">#12</div><div class="ps-lbl">Ranking</div></div>
+    </div>
+  </div>
+  <div class="scroll">
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Historial de consumo</span></div>
+      <div class="card" style="padding:0 16px;">
+        <div class="act-row"><div class="act-icon" style="background:rgba(217,119,6,.12)">🍺</div><div class="act-text"><div>Fuego Negro Stout</div><div class="act-sub">Beer Garden · hoy 20:14 hrs</div></div><div class="act-pts">+5 pts</div></div>
+        <div class="act-row"><div class="act-icon" style="background:rgba(217,119,6,.12)">🍺</div><div class="act-text"><div>Bosque IPA</div><div class="act-sub">Tavern · ayer 21:30 hrs</div></div><div class="act-pts">+5 pts</div></div>
+        <div class="act-row" style="border-bottom:none"><div class="act-icon" style="background:rgba(217,119,6,.12)">🍺</div><div class="act-text"><div>Amber Trail</div><div class="act-sub">Beer Garden · hace 3 días 19:45 hrs</div></div><div class="act-pts">+5 pts</div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Parches recientes</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="tag amber">🌲 Explorador</span>
+        <span class="tag amber">🌙 Noctámbulo</span>
+        <span class="tag amber">🍺 Hophead IPA</span>
+        <span class="tag amber">⚫ Dark Side</span>
+      </div>
+    </div>
+    <div class="sec" style="padding-bottom:24px;margin-top:8px;">
+      <button class="btn btn-red" onclick="showScreen('s-login')">🚪 Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ON TAP ══════ -->
+<div class="screen" id="s-ontap">
+  <div class="hdr">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:4px">Menú digital</div>
+    <div class="serif" style="font-size:22px">🍺 On Tap</div>
+  </div>
+  <div class="fire-line"></div>
+  <div style="display:flex;gap:8px;padding:12px 20px;flex-wrap:wrap;border-bottom:.5px solid var(--border);">
+    <span class="tag amber">Todas</span><span class="tag">Beer Garden</span><span class="tag">Tavern</span>
+  </div>
+  <div class="scroll">
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Disponibles ahora · 6 cervezas</span></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        <div class="beer-card"><div class="beer-img">🍺</div><div class="beer-body"><div class="beer-name">Bosque IPA</div><div class="beer-style">India Pale Ale</div><div class="beer-desc">Notas cítricas y de pino, amargor refrescante con final seco.</div><div class="beer-price">$85 <small>MXN</small></div><div class="beer-stats"><span class="bstat">6.2% ABV</span><span class="bstat">55 IBU</span></div></div></div>
+        <div class="beer-card"><div class="beer-img">🌑</div><div class="beer-body"><div class="beer-name">Fuego Negro</div><div class="beer-style">Imperial Stout</div><div class="beer-desc">Chocolate oscuro, café tostado y un toque ahumado de larga maduración.</div><div class="beer-price">$95 <small>MXN</small></div><div class="beer-stats"><span class="bstat">8.4% ABV</span><span class="bstat">38 IBU</span></div></div></div>
+        <div class="beer-card"><div class="beer-img">🌾</div><div class="beer-body"><div class="beer-name">Amber Trail</div><div class="beer-style">American Amber</div><div class="beer-desc">Caramelo suave, toques de nuez y un balance perfecto entre malta y lúpulo.</div><div class="beer-price">$80 <small>MXN</small></div><div class="beer-stats"><span class="bstat">5.1% ABV</span><span class="bstat">28 IBU</span></div></div></div>
+        <div class="beer-card"><div class="beer-img">🌿</div><div class="beer-body"><div class="beer-name">Cedar Wheat</div><div class="beer-style">Witbier</div><div class="beer-desc">Ligera y refrescante, con notas de naranja, cilantro y trigo suave.</div><div class="beer-price">$75 <small>MXN</small></div><div class="beer-stats"><span class="bstat">4.5% ABV</span><span class="bstat">15 IBU</span></div></div></div>
+        <div class="beer-card"><div class="beer-img">🍂</div><div class="beer-body"><div class="beer-name">Smoke & Oak</div><div class="beer-style">Rauchbier</div><div class="beer-desc">Ahumado intenso con dulzor de malta, madurada en barrica de roble.</div><div class="beer-price">$90 <small>MXN</small></div><div class="beer-stats"><span class="bstat">5.8% ABV</span><span class="bstat">22 IBU</span></div></div></div>
+        <div class="beer-card"><div class="beer-img">⭐</div><div class="beer-body"><div class="beer-name">Campfire Lager</div><div class="beer-style">Munich Lager</div><div class="beer-desc">Clásica y limpia, malta tostada con final suave ideal para compartir.</div><div class="beer-price">$70 <small>MXN</small></div><div class="beer-stats"><span class="bstat">4.8% ABV</span><span class="bstat">18 IBU</span></div></div></div>
+      </div>
+    </div>
+    <div class="sec" style="padding-bottom:24px;margin-top:4px;">
+      <div class="info-box"><p>⭐ Ve al <strong>Home</strong> y registra tu consumo para ganar <strong style="color:var(--amber-l)">+5 pts</strong> por cerveza</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ADMIN ══════ -->
+<div class="fullscreen" id="s-admin">
+  <div class="admin-hdr">
+    <div class="admin-badge">🛡️ Admin · CBC</div>
+    <div class="serif" style="font-size:24px">Panel de control</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px">Campfire Badge Club</div>
+    <div class="session-box"><span>⏱️</span><span>Sesión activa · Expira automáticamente en 30 min de inactividad</span></div>
+  </div>
+  <div class="fire-line"></div>
+  <div class="scroll">
+    <div class="sec" style="padding-top:20px;">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-val">47</div><div class="stat-lbl">Usuarios</div></div>
+        <div class="stat-card"><div class="stat-val">312</div><div class="stat-lbl">Visitas</div></div>
+        <div class="stat-card"><div class="stat-val" id="a-ontap-count">6</div><div class="stat-lbl">On tap</div></div>
+      </div>
+    </div>
+    <div class="sec" style="padding-top:14px;">
+      <div class="pts-row">
+        <div class="pts-cell"><div class="pts-val">+10</div><div class="pts-lbl">pts / visita</div></div>
+        <div class="pts-cell"><div class="pts-val">+5</div><div class="pts-lbl">pts / consumo</div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span class="sec-title">Cervezas on tap</span>
+        <span id="a-update-badge" style="font-size:11px;color:#4ADE80;display:none">✓ Visible en &lt;60s</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;" id="tap-list"></div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-title">Acciones</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <button class="q-btn" style="justify-content:flex-start"><i class="ti ti-plus"></i><span>Agregar cerveza</span></button>
+        <button class="q-btn" style="justify-content:flex-start"><i class="ti ti-edit"></i><span>Editar cerveza</span></button>
+        <button class="q-btn" style="justify-content:flex-start"><i class="ti ti-target"></i><span>Crear desafío</span></button>
+        <button class="q-btn" style="justify-content:flex-start"><i class="ti ti-gift"></i><span>Editar recompensas</span></button>
+        <button class="q-btn" style="justify-content:flex-start"><i class="ti ti-chart-bar"></i><span>Ver estadísticas</span></button>
+      </div>
+    </div>
+    <div class="sec" style="padding-bottom:28px;margin-top:6px;">
+      <button class="btn btn-ghost" onclick="showScreen('s-login')">🚪 Salir del panel admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV: Home | On Tap | Ranking | Parches | Perfil -->
+<nav class="bnav" id="bnav" style="display:none">
+  <button class="ni active" id="ni-0" onclick="navTo('s-home',0)">
+    <i class="ti ti-home"></i>Home
+  </button>
+  <button class="ni" id="ni-1" onclick="navTo('s-ontap',1)">
+    <i class="ti ti-beer"></i>On Tap
+  </button>
+  <button class="ni" id="ni-2" onclick="navTo('s-ranking',2)" style="position:relative;">
+    <i class="ti ti-trophy"></i>Ranking
+  </button>
+  <button class="ni" id="ni-3" onclick="navTo('s-badges',3)">
+    <i class="ti ti-medal"></i>Parches
+  </button>
+  <button class="ni" id="ni-4" onclick="navTo('s-profile',4)">
+    <i class="ti ti-user"></i>Perfil
+  </button>
+</nav>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
