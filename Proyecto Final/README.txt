@@ -4,6 +4,17 @@ Aplicación web de lealtad y recompensas para un bar-restaurante de cerveza arte
 
 ---
 
+## 🌐 Prototipo en línea
+
+**URL:** https://campfire-badgeclub.web.app
+
+Credenciales de prueba:
+- Correo: `trail@campfirebadge.mx`
+- Contraseña: `camping123`
+- Fecha de nacimiento: cualquier fecha que indique 18 años o más
+
+---
+
 ## ¿Qué es este repositorio?
 
 Este repositorio contiene **todo el material del proyecto**: el prototipo navegable, la documentación de requerimientos, los diagramas del proceso y las minutas de las sesiones con el cliente.
@@ -27,10 +38,12 @@ El sistema resuelve la falta de un mecanismo digital de fidelización en el esta
 
 ## ▶️ Cómo ver el prototipo
 
-El prototipo es un único archivo HTML, no requiere instalación ni servidor.
+**Opción 1 — En línea (recomendado):**
+Abre directamente https://campfire-badgeclub.web.app en cualquier navegador.
 
+**Opción 2 — Localmente:**
 1. Descarga o clona este repositorio.
-2. Abre `prototipo/index.html` con doble clic, o arrástralo a tu navegador (Chrome, Safari, Firefox o Edge).
+2. Abre `prototipo/Archivos/index.html` con doble clic, o arrástralo a tu navegador (Chrome, Safari, Firefox o Edge).
 3. Inicia sesión con cualquier correo y contraseña de al menos 8 caracteres con un número (ej. `trail@campfirebadge.mx` / `camping123`).
 4. Verifica tu edad con cualquier fecha de nacimiento que indique 18 años o más.
 5. Explora el dashboard, registra un consumo o visita, revisa el ranking, los parches y el menú On Tap.
@@ -39,8 +52,8 @@ El prototipo es un único archivo HTML, no requiere instalación ni servidor.
 ### Clonar y ver localmente
 
 ```bash
-git clone https://github.com/TU_USUARIO/campfire-badge-club.git
-cd campfire-badge-club/prototipo
+git clone https://github.com/josueglzzz/campfire-badge-club.git
+cd campfire-badge-club/prototipo/Archivos
 open index.html   # macOS
 # o simplemente arrastra index.html a tu navegador
 ```
@@ -103,13 +116,13 @@ De los 12 requerimientos Must-have:
 
 ## 🛠️ Stack tecnológico
 
-**Prototipo actual:** HTML + CSS + JavaScript vanilla (sin dependencias)
+**Prototipo actual:** HTML5 + CSS3 + JavaScript vanilla · desplegado en Firebase Hosting
 
 **Stack planeado para producción:**
 - Frontend: Next.js + TypeScript + TailwindCSS
-- Backend: Supabase
-- Base de datos: PostgreSQL
-- Hosting: Vercel
+- Backend y autenticación: Firebase (Firestore + Firebase Auth)
+- Hosting: Firebase Hosting
+- Control de versiones: GitHub
 
 ---
 
@@ -117,9 +130,10 @@ De los 12 requerimientos Must-have:
 
 - [x] Requerimientos levantados y validados con el cliente
 - [x] Prototipo navegable funcional
+- [x] Prototipo desplegado en línea (Firebase Hosting)
 - [x] Matriz de trazabilidad completa
 - [ ] Diseño de base de datos preliminar (ver `/diagramas`)
-- [ ] Implementación del backend real
+- [ ] Implementación del backend real con Firebase
 
 Ver sección "Trabajo futuro" en la documentación para el detalle completo de actividades pendientes.
 
